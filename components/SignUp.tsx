@@ -4,11 +4,11 @@
 import React, { useState } from "react";
 import { createClient } from "@/lib/supabase";
 import Link from "next/link";
-import { IconEye, IconEyeClosed } from "@tabler/icons-react";
 import Logo from "@/components/ui/Logo";
 import Button from "@/components/ui/Button";
 import ThemeToggle from "./ui/ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
+import PasswordField from "./ui/PasswordField";
 
 // Actual SignUp Component
 export default function SignUp() {
@@ -88,22 +88,15 @@ export default function SignUp() {
     }
   };
 
-  // Front End
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 bg-white dark:bg-neutral-950">
       {/* Left section - Sign-up form */}
       <div className="min-h-screen flex items-center justify-center">
-        <div
-          className="flex items-center w-full justify-center px-4
-         py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
-        >
+        <div className="flex items-center w-full justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-md">
             <div>
               <Logo src="/logo/long.png" width={200} />
-              <h2
-                className="mt-8 text-2xl font-bold leading-9
-               tracking-tight text-black dark:text-white"
-              >
+              <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-black dark:text-white">
                 Sign up for an account
               </h2>
             </div>
@@ -116,8 +109,7 @@ export default function SignUp() {
                     <div>
                       <label
                         htmlFor="first-name"
-                        className="block text-sm font-medium leading-6
-                         text-neutral-700 dark:text-white"
+                        className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
                       >
                         First Name
                       </label>
@@ -130,13 +122,7 @@ export default function SignUp() {
                           // Update FirstName
                           onChange={(e) => setFirstName(e.target.value)}
                           placeholder="John"
-                          className="block w-full bg-gray-100 dark:bg-neutral-800
-                           px-4 rounded-md border dark:border-neutral-700 py-1.5
-                            shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] 
-                            shadow-input text-black dark:text-white
-                             placeholder:text-gray-400 focus:ring-2
-                              focus:ring-neutral-400 focus:outline-none sm:text-sm
-                               sm:leading-6"
+                          className="block w-full bg-gray-100 dark:bg-neutral-800 px-4 rounded-md border dark:border-neutral-700 py-1.5 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input text-black dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-neutral-400 focus:outline-none sm:text-sm sm:leading-6"
                           required
                         />
                       </div>
@@ -144,8 +130,7 @@ export default function SignUp() {
                     <div>
                       <label
                         htmlFor="last-name"
-                        className="block text-sm font-medium leading-6
-                         text-neutral-700 dark:text-white"
+                        className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
                       >
                         Last Name
                       </label>
@@ -158,12 +143,7 @@ export default function SignUp() {
                           // Update LastName
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Doe"
-                          className="block w-full bg-gray-100 dark:bg-neutral-800
-                           px-4 rounded-md border dark:border-neutral-700 py-1.5 
-                           shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input
-                            text-black dark:text-white placeholder:text-gray-400
-                             focus:ring-2 focus:ring-neutral-400 focus:outline-none
-                              sm:text-sm sm:leading-6"
+                          className="block w-full bg-gray-100 dark:bg-neutral-800 px-4 rounded-md border dark:border-neutral-700 py-1.5 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input text-black dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-neutral-400 focus:outline-none sm:text-sm sm:leading-6"
                           required
                         />
                       </div>
@@ -173,8 +153,7 @@ export default function SignUp() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium leading-6
-                       text-neutral-700 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
                     >
                       Email address
                     </label>
@@ -187,107 +166,32 @@ export default function SignUp() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)} // Update Email
                         placeholder="hello@johndoe.com"
-                        className="block w-full bg-gray-100 dark:bg-neutral-800 
-                        px-4 rounded-md border dark:border-neutral-700 py-1.5
-                         shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input
-                          text-black dark:text-white placeholder:text-gray-400
-                           focus:ring-2 focus:ring-neutral-400 focus:outline-none 
-                           sm:text-sm sm:leading-6"
+                        className="block w-full bg-gray-100 dark:bg-neutral-800 px-4 rounded-md border dark:border-neutral-700 py-1.5 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input text-black dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-neutral-400 focus:outline-none sm:text-sm sm:leading-6"
                         required
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium leading-6
-                       text-neutral-700 dark:text-white"
-                    >
-                      Password
-                    </label>
-
-                    <div className="relative mt-2">
-                      <input
-                        id="password"
-                        name="password"
-                        // Show passward if Eye is pressed
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        // Update Password
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="block w-full bg-gray-100 dark:bg-neutral-800
-                         px-4 rounded-md border dark:border-neutral-700 py-1.5 
-                         shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input
-                          text-black dark:text-white placeholder:text-gray-400
-                           focus:ring-2 focus:ring-neutral-400 focus:outline-none 
-                           sm:text-sm sm:leading-6"
-                        required
-                      />
-
-                      <button
-                        type="button"
-                        // Show passward if Eye is pressed
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute inset-y-0 right-3 flex items-center
-                         text-gray-500 dark:text-white-400"
-                      >
-                        {/* Updating Eye Icon when Password is shown or hidden */}
-                        {showPassword ? (
-                          <IconEye className="h-5 w-5" />
-                        ) : (
-                          <IconEyeClosed className="h-5 w-5" />
-                        )}
-                      </button>
-                    </div>
+                  <div className="relative mt-2">
+                    <PasswordField
+                      password={password}
+                      setPassword={setPassword}
+                      showPassword={showPassword}
+                      setShowPassword={setShowPassword}
+                      label
+                      labelText="Password"
+                    />
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="confirm-password"
-                      className="block text-sm font-medium leading-6
-                       text-neutral-700 dark:text-white"
-                    >
-                      Confirm Password
-                    </label>
-
-                    <div className="relative mt-2">
-                      <input
-                        id="confirm-password"
-                        name="confirmPassword"
-                        // Show passward if Eye is pressed
-                        type={showConfirmPassword ? "text" : "password"}
-                        value={confirmPassword}
-                        // Update ConfirmPassword
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="••••••••"
-                        className="block w-full bg-gray-100 dark:bg-neutral-800
-                         px-4 rounded-md border dark:border-neutral-700 py-1.5 
-                         shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input
-                          text-black dark:text-white placeholder:text-gray-400
-                           focus:ring-2 focus:ring-neutral-400 focus:outline-none 
-                           sm:text-sm sm:leading-6"
-                        required
-                      />
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          // Show passward if Eye is pressed
-                          setShowConfirmPassword(!showConfirmPassword)
-                        }
-                        className="absolute inset-y-0 right-3 flex items-center
-                         text-gray-500 dark:text-white-400"
-                      >
-                        {/* Updating Eye Icon when Password is shown or hidden */}
-                        {showConfirmPassword ? (
-                          <IconEye className="h-5 w-5" />
-                        ) : (
-                          <IconEyeClosed className="h-5 w-5" />
-                        )}
-                      </button>
-                    </div>
+                  <div className="relative mt-2">
+                    <PasswordField
+                      password={confirmPassword}
+                      setPassword={setConfirmPassword}
+                      showPassword={showConfirmPassword}
+                      setShowPassword={setShowConfirmPassword}
+                      label
+                      labelText="Confirm Password"
+                    />
                   </div>
 
                   <div>
@@ -298,9 +202,7 @@ export default function SignUp() {
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="bg-[#334EB4] dark:bg-white z-10 rounded-lg
-                       hover:bg-black text-white dark:text-black dark:hover:bg-white
-                       text-sm px-4 mt-10 py-2 flex items-center justify-center w-full"
+                      className="bg-[#334EB4] dark:bg-white z-10 rounded-lg hover:bg-black text-white dark:text-black dark:hover:bg-white text-sm px-4 mt-10 py-2 flex items-center justify-center w-full"
                       color="whiteBlack"
                       onClick={handleSubmit} // Call handleSumbit when clicked
                     >
@@ -326,18 +228,12 @@ export default function SignUp() {
       </div>
 
       {/* Right Section - Image with Message */}
-      <div
-        className="relative w-full z-20 hidden md:flex border-neutral-100
-       overflow-hidden items-center justify-center"
-      >
+      <div className="relative w-full z-20 hidden md:flex border-neutral-100 overflow-hidden items-center justify-center">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30 blur-sm"
           style={{ backgroundImage: "url('/images/sign-up.jpg')" }}
         />
-        <div
-          className="flex flex-col items-center justify-center text-center
-         max-w-lg mx-auto text-black dark:text-white"
-        >
+        <div className="flex flex-col items-center justify-center text-center max-w-lg mx-auto text-black dark:text-white">
           <Logo src="/logo/icon.webp" width={100} />
           <p className="font-semibold text-5xl mt-4">Make a difference!</p>
           <p className=" mt-8">
@@ -358,21 +254,16 @@ export default function SignUp() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 flex items-center justify-center
-             bg-black bg-opacity-50 z-50"
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 10 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="bg-white dark:bg-neutral-800 p-6 rounded-lg 
-              shadow-lg w-96"
+              className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg w-96"
             >
-              <h2
-                className="text-xl font-semibold text-gray-800
-               dark:text-white mb-4"
-              >
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
                 Check your Email
               </h2>
 

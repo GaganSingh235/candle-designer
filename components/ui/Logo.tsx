@@ -24,8 +24,7 @@ export default function Logo({
   return (
     <Link
       href={href} // Logo Link
-      className={`relative z-20 mr-4 flex items-center space-x-2 
-        px-2 py-1 text-sm font-normal text-black ${className}`}
+      className={`relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black ${className}`}
     >
       {/* Logo Image */}
       <Image
@@ -38,10 +37,7 @@ export default function Logo({
       />
       {/* Display Logo Text */}
       {withText && (
-        <span
-          className="flex text-black dark:text-white
-         font-semibold text-md pl-2"
-        >
+        <span className="flex text-black dark:text-white font-semibold text-md pl-2">
           {text}
         </span>
       )}
