@@ -39,6 +39,7 @@ import PasswordField from "./ui/PasswordField";
 export default function Dashboard() {
   // Active category tracker
   const [activeCategory, setActiveCategory] = useState("Candles");
+  const [searchQuery, setSearchQuery] = useState(""); // Search query tracker
 
   // Set active category with default being 'Candles'
   const ActiveComponent =
@@ -55,8 +56,9 @@ export default function Dashboard() {
     <SidebarLayout
       onCategoryChange={setActiveCategory}
       activeCategory={activeCategory}
+      onSearchQueryChange={setSearchQuery}
     >
-      <ActiveComponent /> {/* Show active category */}
+      <ActiveComponent searchQuery={searchQuery} /> {/* Show active category */}
     </SidebarLayout>
   );
 }
@@ -67,12 +69,14 @@ function SidebarLayout({
   children, // Content
   activeCategory,
   onCategoryChange,
+  onSearchQueryChange,
 }: {
   // TypeScript parameter types
   className?: string;
   children: React.ReactNode;
   activeCategory: string;
   onCategoryChange: (category: string) => void;
+  onSearchQueryChange: (searchQuery: string) => void;
 }) {
   const router = useRouter(); // page router
   const supabase = createClient(); // establish supabase connection
@@ -296,6 +300,16 @@ function SidebarLayout({
     },
   ];
 
+  const showSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onSearchQueryChange(value);
+    if (value !== "" && activeCategory !== "Searched") {
+      onCategoryChange("Searched");
+    } else if (value === "" && activeCategory === "Searched") {
+      onCategoryChange("Candles");
+    }
+  };
+
   return (
     <div
       className={`mx-auto flex w-full flex-1 flex-col border-neutral-200 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800 md:flex-row h-screen ${className}`}
@@ -304,6 +318,7 @@ function SidebarLayout({
       <Sidebar
         activeCategory={activeCategory}
         onCategoryChange={onCategoryChange}
+        onSearchQueryChange={onSearchQueryChange}
         className="justify-between gap-10"
       >
         <div className="flex flex-1 flex-col">
@@ -324,6 +339,7 @@ function SidebarLayout({
               <input
                 name="search"
                 type="text"
+                onChange={showSearchCategory}
                 placeholder="Search Candles"
                 className="block w-full h-12 bg-neutral-300 md:bg-white dark:bg-neutral-900 pl-11 pr-4 py-1.5 rounded-lg border-0 text-black dark:text-white placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
               />
@@ -834,14 +850,32 @@ function SidebarLayout({
 function Sidebar({
   className, // className for extra styles
   children, // Content
+  activeCategory,
+  onCategoryChange, //Category tracker
+  onSearchQueryChange, // Search query tacker
 }: {
   // TypeScript Parameter Types
   className?: string;
   children?: React.ReactNode;
   activeCategory: string;
   onCategoryChange: (category: string) => void;
+  onSearchQueryChange: (searchQuery: string) => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Mobile navigation open state
+
+  // Function
+  const showSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value; // Input value
+    onSearchQueryChange(value); // Update search query
+
+    // Switch active category to "Searched" if somthing is being searched
+    if (value !== "" && activeCategory !== "Searched") {
+      onCategoryChange("Searched");
+      // If nothing is searched go back to "Candles" category
+    } else if (value === "" && activeCategory === "Searched") {
+      onCategoryChange("Candles");
+    }
+  };
 
   return (
     <>
@@ -862,6 +896,7 @@ function Sidebar({
             <input
               name="search"
               type="text"
+              onChange={showSearchCategory} // Call search logic
               placeholder="Search Candles"
               className="ml-1 block w-full h-12 bg-neutral-100 md:bg-white dark:bg-neutral-800 pl-10 pr-4 py-1.5 rounded-lg text-black dark:text-white placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"
             />
@@ -874,8 +909,6 @@ function Sidebar({
 
         {/* Mobile Sidebar Navigation  */}
         <AnimatePresence>
-          {" "}
-          {/* Smoothly Animate on appear and exit */}
           {open && (
             <>
               <motion.div

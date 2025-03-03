@@ -6,7 +6,12 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import CandleModel from "./ui/CandleModel";
 import { AnimatePresence, motion } from "framer-motion";
-import { IconFileExport, IconSend, IconX } from "@tabler/icons-react";
+import {
+  IconFileExport,
+  IconSend,
+  IconX,
+  IconArrowBack,
+} from "@tabler/icons-react";
 import DesignBar from "./DesignBar";
 import Logo from "./ui/Logo";
 import Button from "./ui/Button";
@@ -24,6 +29,7 @@ export default function CandleCanvas() {
   const [selectedScent, setSelectedScent] = useState("No Scent");
   const [selectedDecor, setSelectedDecor] = useState("No Decor");
 
+  const [isExported, setIsExported] = useState(false);
   const [exportConfirmOpen, setExportConfirmOpen] = useState(false);
   const [preview, setPreview] = useState(false); // Final Preview state
 
@@ -54,6 +60,7 @@ export default function CandleCanvas() {
         setSelectedColor(data.color);
         setSelectedScent(data.scent);
         setSelectedDecor(data.decor);
+        setIsExported(data.category === "exported"); // Check if candle is exported
       }
     };
     fetchCandle();
@@ -74,6 +81,7 @@ export default function CandleCanvas() {
             setSelectedColor(payload.new.color);
             setSelectedScent(payload.new.scent);
             setSelectedDecor(payload.new.decor);
+            setIsExported(payload.new.category === "exported"); // Check if candle is exported
           }
         }
       )
@@ -139,7 +147,7 @@ export default function CandleCanvas() {
 
   return (
     <div className="flex items-center justify-center h-screen w-full bg-white dark:bg-neutral-900">
-      {/* Logo at top ledt */}
+      {/* Logo at top left */}
       <div className="absolute top-0 left-0">
         <Logo
           className="absolute top-5 left-5"
@@ -157,136 +165,159 @@ export default function CandleCanvas() {
           color={selectedColor}
         />
       )}
-      {/* Design Bar */}
-      <motion.div
-        initial={{ y: 0 }}
-        animate={{ y: preview ? 200 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="absolute bottom-0 w-full flex justify-center"
-      >
-        {/* Pass on customisation changes to detect */}
-        <DesignBar
-          onColorChange={setSelectedColor}
-          onScentChange={setSelectedScent}
-          onDecorChange={setSelectedDecor}
-          onClearAll={clearAll}
-          preview={preview}
-        />
-      </motion.div>
-      {/* Confirm export button */}
-      <motion.div
-        onClick={() => setExportConfirmOpen(true)}
-        initial={{ y: 0 }}
-        animate={{ y: preview ? -150 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="absolute -bottom-[7.5rem] w-full flex justify-center text-white dark:text-black"
-      >
-        <Button
-          className="rounded-xl bg-white py-4 px-20"
-          onClick={() => setExportConfirmOpen(true)}
-        >
-          Export Candle
-        </Button>
-      </motion.div>
-      {/* X button to close preview */}
-      <motion.button
-        onClick={() => setPreview(false)}
-        initial={{ y: -150 }}
-        animate={{ y: preview ? 0 : -150 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="absolute flex flex-row top-8 right-8 text-neutral-500 dark:text-white"
-      >
-        <IconX className="h-10 w-10" />
-      </motion.button>
-      {/* Top right action buttons */}
-      <motion.div
-        initial={{ y: 0 }}
-        animate={{ y: preview ? -150 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="absolute top-7 right-7 flex items-center gap-4"
-      >
-        {/* Save Candle Button */}
-        <Tooltip text="Save" position="bottom" disabled={false}>
-          <Button
-            className="rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-black dark:hover:bg-white text-neutral-500 dark:text-white hover:text-white dark:hover:text-black px-3 py-3"
-            color="whiteBlack"
-            onClick={saveCandle}
-          >
-            <span className="text-sm">
-              <IconFileExport className="h-5 w-5" />
-            </span>
-          </Button>
-        </Tooltip>
-
-        {/* Export preview button */}
-        <Tooltip text="Export" position="bottom" disabled={false}>
-          <Button
-            onClick={() => setPreview(true)}
-            className="rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-black dark:hover:bg-white text-neutral-500 dark:text-white hover:text-white px-3 py-3 dark:hover:text-black"
-            color="whiteBlack"
-          >
-            <span className="text-sm">
-              <IconSend className="h-5 w-5" />
-            </span>
-          </Button>
-        </Tooltip>
-      </motion.div>
-      {/* Export modal */}
-      <AnimatePresence>
-        {/* Smooth enrty and exit animation */}
-        {exportConfirmOpen && (
+      {/* Cisplay design features only if candle is not exported */}
+      {!isExported ? (
+        <>
+          {/* Design Bar */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            initial={{ y: 0 }}
+            animate={{ y: preview ? 200 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute bottom-0 w-full flex justify-center"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 10 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg w-96"
+            {/* Pass on customisation changes to detect */}
+            <DesignBar
+              onColorChange={setSelectedColor}
+              onScentChange={setSelectedScent}
+              onDecorChange={setSelectedDecor}
+              onClearAll={clearAll}
+              preview={preview}
+            />
+          </motion.div>
+
+          {/* Confirm export button */}
+          <motion.div
+            onClick={() => setExportConfirmOpen(true)}
+            initial={{ y: 0 }}
+            animate={{ y: preview ? -150 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute -bottom-[7.5rem] w-full flex justify-center text-white dark:text-black"
+          >
+            <Button
+              className="rounded-xl bg-white py-4 px-20"
+              onClick={() => setExportConfirmOpen(true)}
             >
-              {/* Title */}
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                Permanently Trash Candle
-              </h2>
+              Export Candle
+            </Button>
+          </motion.div>
 
-              {/* Confirmation */}
-              <p className="text-sm text-black dark:text-neutral-400 mb-2">
-                Exporting the candle cannot be undone and you won&apos;t be able
-                to edit the candle anymore. <br />
-              </p>
-              <p className="text-sm text-black dark:text-neutral-400 mb-4">
-                Are you sure you want to continue?
-              </p>
+          {/* X button to close preview */}
+          <motion.button
+            onClick={() => setPreview(false)}
+            initial={{ y: -150 }}
+            animate={{ y: preview ? 0 : -150 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute flex flex-row top-8 right-8 text-neutral-500 dark:text-white"
+          >
+            <IconX className="h-10 w-10" />
+          </motion.button>
 
-              {/* X button to close export modal */}
-              <IconX
-                className="absolute top-6 right-5 hover:rotate-90 cursor-pointer transition duration-300 text-black dark:text-white"
-                onClick={() =>
-                  setExportConfirmOpen && setExportConfirmOpen(false)
-                }
-              />
-
-              {/* Export button */}
+          {/* Top right action buttons */}
+          <motion.div
+            initial={{ y: 0 }}
+            animate={{ y: preview ? -150 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute top-7 right-7 flex items-center gap-4"
+          >
+            {/* Save Candle Button */}
+            <Tooltip text="Save" position="bottom" disabled={false}>
               <Button
-                onClick={() => {
-                  console.log("Exporting Candle!"); // Export logic will go here
-                  router.push("/"); // Redirect to Dashboard
-                }}
-                className="w-full text-sm px-4 py-2 bg-[#334CB5] dark:bg-white text-white dark:text-black rounded-lg hover:bg-black dark:hover:bg-white"
+                className="rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-black dark:hover:bg-white text-neutral-500 dark:text-white hover:text-white dark:hover:text-black px-3 py-3"
+                color="whiteBlack"
+                onClick={saveCandle}
+              >
+                <span className="text-sm">
+                  <IconFileExport className="h-5 w-5" />
+                </span>
+              </Button>
+            </Tooltip>
+
+            {/* Export preview button */}
+            <Tooltip text="Export" position="bottom" disabled={false}>
+              <Button
+                onClick={() => setPreview(true)}
+                className="rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-black dark:hover:bg-white text-neutral-500 dark:text-white hover:text-white px-3 py-3 dark:hover:text-black"
                 color="whiteBlack"
               >
-                Yes, Export
+                <span className="text-sm">
+                  <IconSend className="h-5 w-5" />
+                </span>
               </Button>
-            </motion.div>
-            <ThemeToggle /> {/* Theme Toggle */}
+            </Tooltip>
           </motion.div>
-        )}
-      </AnimatePresence>
+
+          {/* Export modal */}
+          <AnimatePresence>
+            {exportConfirmOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="relative bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-lg w-96"
+                >
+                  {/* Title */}
+                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+                    Permanently Trash Candle
+                  </h2>
+
+                  {/* Confirmation */}
+                  <p className="text-sm text-black dark:text-neutral-400 mb-2">
+                    Exporting the candle cannot be undone and you won&apos;t be
+                    able to edit the candle anymore. <br />
+                  </p>
+                  <p className="text-sm text-black dark:text-neutral-400 mb-4">
+                    Are you sure you want to continue?
+                  </p>
+
+                  {/* X button to close export modal */}
+                  <IconX
+                    className="absolute top-6 right-5 hover:rotate-90 cursor-pointer transition duration-300 text-black dark:text-white"
+                    onClick={() =>
+                      setExportConfirmOpen && setExportConfirmOpen(false)
+                    }
+                  />
+
+                  {/* Export button */}
+                  <Button
+                    onClick={() => {
+                      console.log("Exporting Candle!"); // Export logic will go here
+                      router.push("/"); // Redirect to Dashboard
+                    }}
+                    className="w-full text-sm px-4 py-2 bg-[#334CB5] dark:bg-white text-white dark:text-black rounded-lg hover:bg-black dark:hover:bg-white"
+                    color="whiteBlack"
+                  >
+                    Yes, Export
+                  </Button>
+                </motion.div>
+                <ThemeToggle /> {/* Theme Toggle */}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      ) : (
+        // If candle is exported, display a "return" button
+        <div className="absolute top-7 right-7">
+          <Tooltip text="Return" position="bottom" disabled={false}>
+            <Button
+              className="rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-black dark:hover:bg-white text-neutral-500 dark:text-white hover:text-white dark:hover:text-black px-3 py-3"
+              color="whiteBlack"
+              onClick={() => router.push("/")}
+            >
+              <span className="text-sm">
+                <IconArrowBack className="h-5 w-5" />
+              </span>
+            </Button>
+          </Tooltip>
+        </div>
+      )}
       <ThemeToggle /> {/* Theme Toggle */}
     </div>
   );
