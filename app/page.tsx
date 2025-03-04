@@ -39,6 +39,6 @@ export default function DashboardPage() {
   }
 
   return (
-    <Dashboard /> // Dashboard Component
+    <Dashboard /> // Display Dashboard Component
   );
 }

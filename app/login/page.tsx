@@ -1,10 +1,8 @@
-// Importing necessary libraries & Components
+// Import Login component
 import React from "react";
 import Login from "@/components/Login";
 
 // Define Exported Login Page
 export default function LoginPage() {
-  return (
-    <Login /> // Login Component
-  );
+  return <Login />; // Display Login Component
 }
