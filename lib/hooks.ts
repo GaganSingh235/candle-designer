@@ -278,7 +278,7 @@ export async function usePermanentlyTrashCandle(
 
 // Define exported useExportCandle hook
 export async function useExportCandle(
-  // Parameters and types
+  // Parameter and type
   candleId: string
 ) {
   // Return alert error is user not authenticated
@@ -293,12 +293,32 @@ export async function useExportCandle(
     .select("*")
     .eq("user_id", userData.user.id)
     .eq("id", candleId)
-    .single();
+    .single(); // Returns as single object
 
   // Return alert error if dailed to fetch candle
   if (fetchError) {
     return alert(`Error fetching candle: ${fetchError?.message}`);
   }
 
-  console.log(`Exporting Candle: ${candleData}`); // Export logic will go here
+  // Send POST request to API endpoint to send candle data email
+  const response = await fetch("/api/email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // Indicate request body contains JSON data
+    },
+    body: JSON.stringify({
+      email: userData.user.email, // User's email in request payload
+      candleData, // Candle data to be sent
+    }),
+  });
+
+  // Parse the response as JSON
+  const result = await response.json();
+
+  // Display success / error alert based on response status
+  alert(
+    response.ok
+      ? "Candle Exported Successfully. Check your email!"
+      : `Error exporting candle: ${result.error}`
+  );
 }
