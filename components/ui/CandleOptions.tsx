@@ -23,7 +23,7 @@ import {
 import Button from "./Button";
 import ThemeToggle from "./ThemeToggle";
 
-// Define exported CnadleOptions component
+// Define exported CandleOptions component
 export default function CandleOptions({
   // Parameters
   optionsOpenId, // Id for chosen candle
@@ -41,14 +41,14 @@ export default function CandleOptions({
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   router: ReturnType<typeof useRouter>;
 }) {
-  // State for managing rename, trash confirmation, and export confirmation modals
+  // States for managing rename, trash confirmation, and export confirmation modals
   const [renameOpen, setRenameOpen] = useState(false);
   const [newName, setNewName] = useState("");
   const [trashConfirmOpen, setTrashConfirmOpen] = useState(false);
   const [exportConfirmOpen, setExportConfirmOpen] = useState(false);
 
   return (
-    // Smooth ebtry / exit animations
+    // Smooth entry / exit animations
     <AnimatePresence>
       {/* Render options dropdown if it matches selected candle and is not exported */}
       {optionsOpenId === candleId && candleCategory !== "exported" && (
@@ -58,7 +58,7 @@ export default function CandleOptions({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="z-50 absolute -bottom-[230px] right-0 mb-2 w-[200px] rounded-lg bg-neutral-200 md:bg-white text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] dark:bg-neutral-700"
+          className="z-50 absolute -bottom-[230px] right-0 mb-2 w-[200px] rounded-lg bg-white dark:bg-neutral-800 border-[0.5px] dark:border-[0.5px] dark:border-neutral-700 text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
         >
           {/* Edit button */}
           <button
@@ -321,7 +321,7 @@ export default function CandleOptions({
                   {/* Export button */}
                   <Button
                     onClick={() => {
-                      // Exportselected candle using hook and close modal
+                      // Export selected candle using hook and close modal
                       useExportCandle(candleId);
                       useUpdateCandleCategory(candleId, "exported");
                       if (setExportConfirmOpen) setExportConfirmOpen(false);
