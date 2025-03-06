@@ -30,7 +30,7 @@ import CandleOptions from "./ui/CandleOptions";
 export function Searched({
   searchQuery, // Search query parameter
 }: {
-  searchQuery: string; // TypeScript paramter type
+  searchQuery: string; // TypeScript parameter type
 }) {
   const router = useRouter(); // Page router
   const supabase = createClient(); // Establish Supabase connection instance
@@ -61,12 +61,12 @@ export function Searched({
     }[]
   >([]);
 
-  // Effct to fetch candles from Supabase
+  // Effect to fetch candles from Supabase
   useEffect(() => {
-    if (!searchQuery) return; // Return is query is emtpy
+    if (!searchQuery) return; // Return if query is empty
 
     const fetchCandles = async () => {
-      // Search in all relevent column
+      // Search in all relevant column
       const { data, error } = await supabase
         .from("candles")
         .select("id, name, type, color, scent, decor, is_current, category")
@@ -185,7 +185,7 @@ export function Searched({
                 color={candle.color}
               />
 
-              {/* Display candle name, end with "..." if abover 25 characters */}
+              {/* Display candle name, end with "..." if above 25 characters */}
               <h3 className="absolute left-4 bottom-4 text-sm font-medium text-neutral-800 dark:text-white truncate">
                 {candle.name.length > 25
                   ? `${candle.name.slice(0, 35)}...`
@@ -299,7 +299,7 @@ export function Candles() {
 
     // Check if name exists in Supabase
     const { data: existingCandles, error: nameCheckError } = await supabase
-      .from("candles") // From candles tabler
+      .from("candles") // From candles table
       .select("id") // Select id column
       .eq("user_id", userData.user.id) // Select using user id
       .eq("name", candleName); // Select name
@@ -318,7 +318,7 @@ export function Candles() {
     const { error: updateError } = await supabase
       .from("candles")
       .update({ is_current: false }) // Set previous current to false
-      .eq("user_id", userData.user.id) // Selct using user id
+      .eq("user_id", userData.user.id) // Select using user id
       .eq("is_current", true); // Set this candle to current
 
     // Return alert error if failed to update candle
@@ -375,7 +375,7 @@ export function Candles() {
               color={candle.color}
             />
 
-            {/* Display candle name, end with "..." if abover 25 characters */}
+            {/* Display candle name, end with "..." if above 25 characters */}
             <h3 className="absolute left-4 bottom-4 text-sm font-medium text-neutral-800 dark:text-white truncate">
               {candle.name.length > 25
                 ? `${candle.name.slice(0, 35)}...`
@@ -469,7 +469,7 @@ export function Candles() {
                   </motion.span>
                 </button>
 
-                {/* Smoorthly animated dropdown */}
+                {/* Smoothly animated dropdown */}
                 <AnimatePresence>
                   {dropdownOpen && (
                     <motion.ul
@@ -538,7 +538,7 @@ export function Starred() {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   useClickOutside(dropdownRef, buttonRef, () => setOptionsOpenId(null));
 
-  // Candle informtaion
+  // Candle information
   const [candles, setCandles] = useState<
     {
       id: string;
@@ -590,7 +590,7 @@ export function Starred() {
                 color={candle.color}
               />
 
-              {/* Display candle name, end with "..." if abover 25 characters */}
+              {/* Display candle name, end with "..." if above 25 characters */}
               <h3 className="absolute left-4 bottom-4 text-sm font-medium text-neutral-800 dark:text-white truncate">
                 {candle.name.length > 25
                   ? `${candle.name.slice(0, 35)}...`
@@ -696,7 +696,7 @@ export function Trashed() {
                 color={candle.color}
               />
 
-              {/* Display candle name, end with "..." if abover 25 characters */}
+              {/* Display candle name, end with "..." if above 25 characters */}
               <h3 className="absolute left-4 bottom-4 text-sm font-medium text-neutral-800 dark:text-white truncate">
                 {candle.name.length > 25
                   ? `${candle.name.slice(0, 35)}...`

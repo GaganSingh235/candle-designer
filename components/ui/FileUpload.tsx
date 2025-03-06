@@ -30,7 +30,7 @@ export default function FileUpload({
       // Cleanup function to revoke the object URL when component unmounts or file changes
       return () => URL.revokeObjectURL(objectUrl);
     }
-  }, [file]); // Re-run effect when file dependecy changes
+  }, [file]); // Re-run effect when file dependency changes
 
   // Function to handle file selection
   const handleFileChange = (newFile: File) => {

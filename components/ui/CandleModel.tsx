@@ -10,19 +10,22 @@ export default function CandleModel({
   preview, // Final preview state
   type,
   color,
+  className,
 }: {
   // TypeScript Parameter Types
   preview?: boolean;
   type: string;
   color: string;
+  className?: string;
 }) {
   const { scene } = useGLTF(`/models/${type}.glb`); // Creating 3D Candle Object
   const ref = useRef<THREE.Object3D>(null); // 3D candle object reference
-  const scale = preview ? 1.15 : 1; // Candle scale state
+  const scale = preview ? 1 : 0.85; // Candle scale state
 
   // Effect to update candle colour
   useEffect(() => {
     if (!ref.current) return;
+    console.log("CandleModel received color:", color);
 
     if (ref.current) {
       ref.current.traverse((child) => {
@@ -47,13 +50,13 @@ export default function CandleModel({
     };
 
     animate();
-    // Cleanup functio to remoce Animation Frame when component unmounts
+    // Cleanup function to remove Animation Frame when component unmounts
     return () => cancelAnimationFrame(frameId);
   }, [preview, scale]);
 
   return (
     // Canvas for model
-    <Canvas className="top-14 md:top-0">
+    <Canvas className={`md:top-0 ${className}`}>
       <ambientLight intensity={0.75} /> {/* Set light intensity */}
       <directionalLight position={[10, 10, 10]} /> {/* Position light source */}
       <primitive object={scene} ref={ref} /> {/* 3D Candle Model object */}

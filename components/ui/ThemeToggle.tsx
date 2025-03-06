@@ -13,7 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Define and export the ThemeToggle Component
 export default function ThemeToggle({
-  className = "fixed bottom-7 right-7", // Bottom right fixed position
+  className = "fixed bottom-7 right-7 z-50", // Bottom right fixed position
 }: {
   // TypeScript className Type
   className?: string;

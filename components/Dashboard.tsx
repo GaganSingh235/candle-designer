@@ -127,7 +127,7 @@ function SidebarLayout({
   }, [supabase]); // Re-run effect if any change in Supabase
 
   const [confirmResetOpen, setConfirmResetOpen] = useState(false); // Open reset password modal state
-  // Pasword trackers
+  // Password trackers
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -209,7 +209,7 @@ function SidebarLayout({
 
     if (confirmDelete !== "DELETE") return; // Return if "DELETE" has not been entered
 
-    // Retrieve user from Supavase
+    // Retrieve user from Supabase
     const { data, error } = await supabase.auth.getUser();
     // Return error if failed to retrieve user
     if (error || !data.user) return setError("Failed to retrieve user.");
@@ -241,7 +241,7 @@ function SidebarLayout({
     const fileName = `${Date.now()}.${fileExt}`;
     const filePath = `avatars/${fileName}`;
 
-    // Attempot to upload avatar to Supabase storage
+    // Attempt to upload avatar to Supabase storage
     const { error: uploadError } = await supabase.storage
       .from("avatars")
       .upload(filePath, file, { cacheControl: "3600", upsert: true });
@@ -395,7 +395,7 @@ function SidebarLayout({
         </div>
         {/* Account profile dropdown reference */}
         <div
-          className="relative group/profile rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-00 transition duration-200"
+          className="relative group/profile rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition duration-200"
           ref={dropdownRef}
         >
           <button
@@ -868,7 +868,6 @@ function SidebarLayout({
                         Yes, Logout
                       </Button>
                     </motion.div>
-                    <ThemeToggle /> {/* Theme Toggle */}
                   </motion.div>
                 )}
               </motion.div>
@@ -904,7 +903,7 @@ function Sidebar({
     const value = e.target.value; // Input value
     onSearchQueryChange(value); // Update search query
 
-    // Switch active category to "Searched" if somthing is being searched
+    // Switch active category to "Searched" if something is being searched
     if (value !== "" && activeCategory !== "Searched") {
       onCategoryChange("Searched");
       // If nothing is searched go back to "Candles" category
@@ -956,7 +955,7 @@ function Sidebar({
                 className="fixed inset-0 z-[90] bg-black/50"
                 onClick={() => setOpen(false)} // Exit sidebar when press outside
               />
-              {/* Sidebar animates smoothly from left into the sceen */}
+              {/* Sidebar animates smoothly from left into the screen */}
               <motion.div
                 initial={{ x: "-100%", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}

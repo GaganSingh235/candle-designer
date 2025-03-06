@@ -18,11 +18,12 @@ import Button from "./ui/Button";
 import Tooltip from "./ui/Tooltip";
 import ThemeToggle from "./ui/ThemeToggle";
 
+// Export defined CandleCanvas component
 export default function CandleCanvas() {
   const router = useRouter(); // Page router
   const supabase = createClient(); // Establish Supabase connection instance
 
-  // Candle Data Informtion
+  // Candle Data Information
   const [candleId, setCandleId] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [selectedColor, setSelectedColor] = useState("#ffffff");
@@ -50,7 +51,7 @@ export default function CandleCanvas() {
         .select("id, type, color, scent, decor, category") // Select columns
         .eq("user_id", userData.user.id) // Select from authorised user's candles
         .eq("is_current", true) // Select current candle
-        .single(); // Return single object rather than arrary
+        .single(); // Return single object rather than array
 
       if (error) {
         return console.error("Error fetching candle data:", error);
@@ -163,9 +164,10 @@ export default function CandleCanvas() {
           preview={preview}
           type={selectedType}
           color={selectedColor}
+          className="top-14"
         />
       )}
-      {/* Cisplay design features only if candle is not exported */}
+      {/* Display design features only if candle is not exported */}
       {!isExported ? (
         <>
           {/* Design Bar */}
@@ -266,7 +268,7 @@ export default function CandleCanvas() {
                 >
                   {/* Title */}
                   <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-                    Permanently Trash Candle
+                    Export Candle
                   </h2>
 
                   {/* Confirmation */}
@@ -298,7 +300,6 @@ export default function CandleCanvas() {
                     Yes, Export
                   </Button>
                 </motion.div>
-                <ThemeToggle /> {/* Theme Toggle */}
               </motion.div>
             )}
           </AnimatePresence>

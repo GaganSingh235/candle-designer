@@ -93,7 +93,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)} // Update email
           placeholder="hello@johndoe.com"
-          className="block w-full rounded-md border dark:border-neutral-700 bg-gray-100 dark:bg-neutral-800 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] px-4 pl-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-neutral-400 mb-2 z-50"
+          className="block w-80 md:w-full rounded-md border dark:border-neutral-700 bg-gray-100 dark:bg-neutral-800 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] px-4 pl-4 text-black dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-neutral-400 mb-2 z-50"
           required
         />
 
@@ -108,7 +108,7 @@ export default function Login() {
             height: isClicked ? "38px" : "0px",
             opacity: isClicked ? 1 : 0,
           }}
-          className="relative w-full"
+          className="relative w-80 md:w-full"
         >
           <PasswordField
             password={password}

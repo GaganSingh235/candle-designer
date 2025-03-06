@@ -31,7 +31,7 @@ export default function SignUp() {
 
   // Handles Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent Page Refesh
+    e.preventDefault(); // Prevent page refresh
 
     // Checking if fields are empty
     if (!firstName || !lastName || !email || !password) {
@@ -77,7 +77,7 @@ export default function SignUp() {
         );
       }
 
-      // Show the Email Confirmtion message
+      // Show the Email Confirmation message
       setConfirmEmailOpen(true);
 
       // Catching & Displaying any errors
