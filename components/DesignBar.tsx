@@ -96,7 +96,10 @@ export default function DesignBar({
           onClick={() => setOpen(!open)}
           className="h-10 w-10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.4)] border dark:border-neutral-700 bg-gray-100 dark:bg-neutral-800 flex items-center justify-center"
         >
-          <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+          <IconLayoutNavbarCollapse
+            strokeWidth={1.5}
+            className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+          />
         </button>
       </div>
     </>
@@ -138,7 +141,10 @@ function ColorButton({
           onClick={() => setShowPicker(!showPicker)}
           className="h-10 w-10 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center hover:scale-125 transition duration-200"
         >
-          <IconPalette className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+          <IconPalette
+            strokeWidth={1.5}
+            className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+          />
         </button>
       </Tooltip>
 
@@ -182,7 +188,10 @@ function ColorButton({
                     setSelectedColor(e.target.value); // Update selected colour
                   }}
                 />
-                <IconColorPicker className="absolute -top-2 -right-2 text-neutral-500 dark:text-neutral-400" />
+                <IconColorPicker
+                  strokeWidth={1.5}
+                  className="absolute -top-2 -right-2 text-neutral-500 dark:text-neutral-400"
+                />
               </button>
             </div>
           </motion.div>
@@ -230,7 +239,10 @@ function ScentButton({
           onClick={() => setShowPicker(!showPicker)} // Show / close picker
           className="h-10 w-10 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center hover:scale-125 transition duration-200"
         >
-          <IconSpray className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+          <IconSpray
+            strokeWidth={1.5}
+            className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+          />
         </button>
       </Tooltip>
 
@@ -299,7 +311,10 @@ function DecorButton({
           className="h-10 w-10 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center hover:scale-125 transition duration-200"
           onClick={() => setShowPicker(!showPicker)} // Show / close picker
         >
-          <IconSparkles className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+          <IconSparkles
+            strokeWidth={1.5}
+            className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+          />
         </button>
       </Tooltip>
 
@@ -347,7 +362,10 @@ function ClearAllButton({ onClearAll }: { onClearAll: () => void }) {
         className="h-10 w-10 rounded-full bg-gray-100 dark:bg-neutral-700 flex items-center justify-center hover:scale-125 transition duration-200"
         onClick={onClearAll}
       >
-        <IconTrash className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+        <IconTrash
+          strokeWidth={1.5}
+          className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+        />
       </button>
     </Tooltip>
   );

@@ -66,7 +66,10 @@ export default function CandleOptions({
             onClick={() => useOpenCandle(candleId, setLoading, router)}
             className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
           >
-            <IconPencil className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+            <IconPencil
+              strokeWidth={1.5}
+              className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+            />
             Edit
           </button>
 
@@ -75,7 +78,10 @@ export default function CandleOptions({
             onClick={() => setRenameOpen(true)}
             className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
           >
-            <IconLabel className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+            <IconLabel
+              strokeWidth={1.5}
+              className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+            />
             Rename
           </button>
 
@@ -87,7 +93,10 @@ export default function CandleOptions({
               }}
               className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
             >
-              <IconStar className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+              <IconStar
+                strokeWidth={1.5}
+                className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+              />
               Star
             </button>
           )}
@@ -100,7 +109,10 @@ export default function CandleOptions({
               }}
               className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
             >
-              <IconStarOff className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+              <IconStarOff
+                strokeWidth={1.5}
+                className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+              />
               Unstar
             </button>
           )}
@@ -113,7 +125,10 @@ export default function CandleOptions({
               }}
               className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
             >
-              <IconTrash className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+              <IconTrash
+                strokeWidth={1.5}
+                className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+              />
               Trash
             </button>
           )}
@@ -125,14 +140,20 @@ export default function CandleOptions({
                 onClick={() => useUpdateCandleCategory(candleId, "candles")}
                 className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
               >
-                <IconTrashOff className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                <IconTrashOff
+                  strokeWidth={1.5}
+                  className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                />
                 Untrash
               </button>
               <button
                 onClick={() => setTrashConfirmOpen && setTrashConfirmOpen(true)}
                 className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
               >
-                <IconTrash className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                <IconTrash
+                  strokeWidth={1.5}
+                  className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                />
                 Trash Forever
               </button>
             </>
@@ -142,7 +163,10 @@ export default function CandleOptions({
               onClick={() => setExportConfirmOpen && setExportConfirmOpen(true)}
               className="w-[96%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 rounded-md px-4 m-1 p-2 hover:bg-[#F5F5F5] dark:hover:bg-neutral-600 text-sm"
             >
-              <IconSend className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+              <IconSend
+                strokeWidth={1.5}
+                className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+              />
               Export
             </button>
           )}

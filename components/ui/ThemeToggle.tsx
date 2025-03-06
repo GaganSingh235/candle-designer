@@ -74,10 +74,10 @@ export default function ThemeToggle({
                 >
                   {hovered ? (
                     // Filled sun icon when hovered
-                    <IconSunFilled className="w-6 h-6" />
+                    <IconSunFilled strokeWidth={1.75} className="w-6 h-6" />
                   ) : (
                     // Normal Sun Icon when not hovered
-                    <IconSun className="w-6 h-6" />
+                    <IconSun strokeWidth={1.75} className="w-6 h-6" />
                   )}
                 </motion.div>
               ) : (
@@ -91,10 +91,16 @@ export default function ThemeToggle({
                 >
                   {hovered ? (
                     // Filled moon icon when hovered
-                    <IconMoonFilled className="text-neutral-500 w-6 h-6" />
+                    <IconMoonFilled
+                      strokeWidth={1.75}
+                      className="text-neutral-500 w-6 h-6"
+                    />
                   ) : (
                     // Normal moon icons when not hovered
-                    <IconMoon className="text-neutral-500 w-6 h-6" />
+                    <IconMoon
+                      strokeWidth={1.75}
+                      className="text-neutral-500 w-6 h-6"
+                    />
                   )}
                 </motion.div>
               )}

@@ -50,9 +50,9 @@ export default function PasswordField({
         >
           {/* Updating Eye Icon when Password is shown or hidden */}
           {showPassword ? (
-            <IconEye className="h-5 w-5" />
+            <IconEye strokeWidth={1} className="h-5 w-5" />
           ) : (
-            <IconEyeClosed className="h-5 w-5" />
+            <IconEyeClosed strokeWidth={1} className="h-5 w-5" />
           )}
         </button>
       </div>

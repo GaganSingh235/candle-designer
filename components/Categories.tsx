@@ -61,19 +61,6 @@ export function Searched({
     }[]
   >([]);
 
-  // Display Loader when loading
-  if (loading) {
-    return (
-      <Loader
-        loadingStates={[
-          "Loading Assets",
-          "Rendering Scene",
-          "Finalising setup",
-        ]}
-      />
-    );
-  }
-
   // Effct to fetch candles from Supabase
   useEffect(() => {
     if (!searchQuery) return; // Return is query is emtpy
@@ -152,6 +139,19 @@ export function Searched({
       supabase.removeChannel(channel);
     };
   }, [searchQuery, supabase]);
+
+  // Display Loader when loading
+  if (loading) {
+    return (
+      <Loader
+        loadingStates={[
+          "Loading Assets",
+          "Rendering Scene",
+          "Finalising setup",
+        ]}
+      />
+    );
+  }
 
   return (
     <div className="flex items-center md:items-start flex-col h-full w-full pt-5 gap-5 md:gap-10 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900 ">
@@ -358,7 +358,7 @@ export function Candles() {
             className="w-96 md:w-full min-h-[200px] flex items-center justify-center rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.2)] bg-gray-100 dark:bg-neutral-800 border dark:border-neutral-700"
             onClick={() => setModalOpen(true)}
           >
-            <IconPlus className="text-neutral-400 h-10 w-10" />
+            <IconPlus strokeWidth={1.75} className="text-neutral-400 h-8 w-8" />
           </Button>
         </Tooltip>
 
@@ -433,6 +433,7 @@ export function Candles() {
 
               {/* X icon to close model */}
               <IconX
+                strokeWidth={1.5}
                 className="absolute top-6 right-5 hover:rotate-90 cursor-pointer transition duration-300 text-black dark:text-white"
                 onClick={() => setModalOpen(false)}
               />
@@ -464,7 +465,7 @@ export function Candles() {
                     animate={{ rotate: dropdownOpen ? 180 : 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                   >
-                    <IconChevronDown />
+                    <IconChevronDown strokeWidth={1.5} />
                   </motion.span>
                 </button>
 

@@ -21,7 +21,7 @@ import {
   IconCandle,
   IconTrash,
   IconStar,
-  IconChevronDown,
+  IconSelector,
   IconLogout,
   IconUserOff,
   IconSearch,
@@ -72,6 +72,7 @@ function SidebarLayout({
   onSearchQueryChange,
 }: {
   // TypeScript parameter types
+
   className?: string;
   children: React.ReactNode;
   activeCategory: string;
@@ -277,34 +278,50 @@ function SidebarLayout({
     {
       label: "Candles",
       icon: (
-        <IconCandle className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconCandle
+          strokeWidth={1.5}
+          className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+        />
       ),
     },
     {
       label: "Starred",
       icon: (
-        <IconStar className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconStar
+          strokeWidth={1.5}
+          className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+        />
       ),
     },
     {
       label: "Trashed",
       icon: (
-        <IconTrash className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconTrash
+          strokeWidth={1.5}
+          className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+        />
       ),
     },
     {
       label: "Exported",
       icon: (
-        <IconSend className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+        <IconSend
+          strokeWidth={1.5}
+          className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+        />
       ),
     },
   ];
 
+  // Function to show search category
   const showSearchCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    onSearchQueryChange(value);
+    const value = e.target.value; // Get value from input
+    onSearchQueryChange(value); // Update search query
+
+    // If value is not empty and active category is not "Searched", change to "Searched"
     if (value !== "" && activeCategory !== "Searched") {
       onCategoryChange("Searched");
+      // If value is empty and active category is "Searched", change to "Candles"
     } else if (value === "" && activeCategory === "Searched") {
       onCategoryChange("Candles");
     }
@@ -333,7 +350,8 @@ function SidebarLayout({
             {/* Searchbar */}
             <div className="relative rounded-lg z-20 hidden md:flex items-center justify-start mb-5 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
               <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-700 dark:text-neutral-200">
-                <IconSearch className="h-5 w-5" /> {/* Searchbar Icon */}
+                <IconSearch strokeWidth={1.5} className="h-5 w-5" />{" "}
+                {/* Searchbar Icon */}
               </span>
               {/* Searchbar Input */}
               <input
@@ -376,7 +394,10 @@ function SidebarLayout({
           </div>
         </div>
         {/* Account profile dropdown reference */}
-        <div className="relative group/profile" ref={dropdownRef}>
+        <div
+          className="relative group/profile rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-00 transition duration-200"
+          ref={dropdownRef}
+        >
           <button
             ref={buttonRef}
             onClick={() => setAccountOpen((prev) => !prev)}
@@ -411,14 +432,15 @@ function SidebarLayout({
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               {/* Animated icon indicating dropdown */}
-              <IconChevronDown className="h-4 w-4 text-black dark:text-white" />
+              <IconSelector
+                strokeWidth={1.25}
+                className="h-5 w-5 text-black dark:text-white"
+              />
             </motion.span>
           </button>
 
           {/* Account Settings Dropdown */}
           <AnimatePresence>
-            {" "}
-            {/* Smoothly Animate on appear and exit */}
             {accountOpen && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -437,8 +459,8 @@ function SidebarLayout({
                       <span className="text-xs font-light text-neutral-700 dark:text-neutral-400">
                         {/* Display user email, or "Loading..." */}
                         {userData.email
-                          ? // If email is longer than 20 characters, "..." will be displayed at the end
-                            userData.email.length > 20
+                          ? // If email is longer than 30 characters, "..." will be displayed at the end
+                            userData.email.length > 30
                             ? `${userData.email.slice(0, 20)}...`
                             : userData.email
                           : "Loading..."}
@@ -464,7 +486,10 @@ function SidebarLayout({
                     onClick={() => setConfirmDeleteOpen(true)} // Display delete account modal when clicked
                     className="w-[97%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 mx-1 rounded-md px-4 py-2 my-1 hover:bg-[#F5F5F5] dark:hover:bg-neutral-800"
                   >
-                    <IconUserOff className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                    <IconUserOff
+                      strokeWidth={1.5}
+                      className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                    />
                     Delete Account
                   </button>
                   {/* Reset password button */}
@@ -472,7 +497,10 @@ function SidebarLayout({
                     onClick={() => setConfirmResetOpen(true)} // Display reset password modal when clicked
                     className="w-[97%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 mx-1 rounded-md px-4 py-2 mb-1 hover:bg-[#F5F5F5] dark:hover:bg-neutral-800"
                   >
-                    <IconKey className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                    <IconKey
+                      strokeWidth={1.5}
+                      className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                    />
                     Reset Password
                   </button>
                   {/* Change Avatar button */}
@@ -480,15 +508,21 @@ function SidebarLayout({
                     onClick={() => setChangeAvatarOpen(true)} // Display avatar modal when clicked
                     className="w-[97%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 mx-1 rounded-md px-4 py-2 mb-1 hover:bg-[#F5F5F5] dark:hover:bg-neutral-800"
                   >
-                    <IconUserCircle className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                    <IconUserCircle
+                      strokeWidth={1.5}
+                      className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                    />
                     Change Avatar
                   </button>
-                  {/* Chaneg name button */}
+                  {/* Change name button */}
                   <button
                     onClick={() => setChangeNameOpen(true)} // Display change name modal when clicked
                     className="w-[97%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 mx-1 rounded-md px-4 py-2 mb-1 hover:bg-[#F5F5F5] dark:hover:bg-neutral-800"
                   >
-                    <IconLabel className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                    <IconLabel
+                      strokeWidth={1.5}
+                      className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                    />
                     Change Name
                   </button>
                   {/* Logout button */}
@@ -496,7 +530,10 @@ function SidebarLayout({
                     onClick={() => setConfirmSignOut(true)} // Display logout modal when clicked
                     className="w-[97%] flex items-center gap-3 text-neutral-700 dark:text-neutral-200 mx-1 rounded-md px-4 py-2 mt-1 hover:bg-[#F5F5F5] dark:hover:bg-neutral-800"
                   >
-                    <IconLogout className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+                    <IconLogout
+                      strokeWidth={1.5}
+                      className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200"
+                    />
                     Logout
                   </button>
                 </ul>
@@ -884,12 +921,12 @@ function Sidebar({
         {children} {/* Content */}
       </motion.div>
 
-      <div className="fixed z-50 flex h-28 w-full flex-row items-center justify-between bg-neutral-100 px-4 dark:bg-neutral-800 md:hidden border-b dark:border-neutral-700 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+      <div className="fixed z-50 flex h-[6.5rem] w-full flex-row items-center justify-between bg-neutral-100 px-4 dark:bg-neutral-800 md:hidden border-b dark:border-neutral-700 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
         <div className="flex w-full justify-end">
           {/* Mobile Searchbar */}
           <div className="absolute w-[76%] left-5 top-7 rounded-lg z-20 flex items-center justify-start mb-5">
             <span className="absolute left-1 top-1/2 transform -translate-y-1/2 text-neutral-700 dark:text-neutral-200">
-              <IconSearch />
+              <IconSearch strokeWidth={1.5} />
             </span>
             {/* Searchbar input */}
             <input
@@ -901,6 +938,7 @@ function Sidebar({
             />
           </div>
           <IconMenu2
+            strokeWidth={1.5}
             className="text-neutral-700 dark:text-neutral-200 relative right-2"
             onClick={() => setOpen(true)}
           />

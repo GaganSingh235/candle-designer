@@ -22,6 +22,8 @@ export default function CandleModel({
 
   // Effect to update candle colour
   useEffect(() => {
+    if (!ref.current) return;
+
     if (ref.current) {
       ref.current.traverse((child) => {
         if (child instanceof THREE.Mesh) {

@@ -194,7 +194,8 @@ export default function CandleCanvas() {
             className="absolute -bottom-[7.5rem] w-full flex justify-center text-white dark:text-black"
           >
             <Button
-              className="rounded-xl bg-white py-4 px-20"
+              className="rounded-xl bg-[#334CB5] hover:bg-black transition duration-200 dark:bg-white py-4 px-20"
+              color="whiteBlack"
               onClick={() => setExportConfirmOpen(true)}
             >
               Export Candle
@@ -227,7 +228,7 @@ export default function CandleCanvas() {
                 onClick={saveCandle}
               >
                 <span className="text-sm">
-                  <IconFileExport className="h-5 w-5" />
+                  <IconFileExport strokeWidth={1.5} className="h-5 w-5" />
                 </span>
               </Button>
             </Tooltip>
@@ -240,7 +241,7 @@ export default function CandleCanvas() {
                 color="whiteBlack"
               >
                 <span className="text-sm">
-                  <IconSend className="h-5 w-5" />
+                  <IconSend strokeWidth={1.5} className="h-5 w-5" />
                 </span>
               </Button>
             </Tooltip>
@@ -312,7 +313,7 @@ export default function CandleCanvas() {
               onClick={() => router.push("/")}
             >
               <span className="text-sm">
-                <IconArrowBack className="h-5 w-5" />
+                <IconArrowBack strokeWidth={1.5} className="h-5 w-5" />
               </span>
             </Button>
           </Tooltip>
