@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 
 // Create a Supabase admin client using env variables
 const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_AUTH_URL!,
+  process.env.NEXT_PUBLIC_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
