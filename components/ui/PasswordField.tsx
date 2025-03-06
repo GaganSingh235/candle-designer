@@ -9,7 +9,8 @@ export default function PasswordField({
   setShowPassword,
   label,
   labelText,
-  className, // Extra className styles
+  className, // Extra className styles for field
+  labelClassName, // Extra className styles for label
 }: {
   // TypeScript Paramter Types
   password: string;
@@ -19,24 +20,26 @@ export default function PasswordField({
   label?: boolean;
   labelText?: string;
   className?: string;
+  labelClassName?: string;
 }) {
   return (
     <>
       {label && (
         <label
           htmlFor="password"
-          className="block text-sm leading-6 text-neutral-700 dark:text-neutral-400 mt-2"
+          className={`block text-sm leading-6 text-neutral-700 dark:text-neutral-400 mt-2 ${labelClassName}`}
         >
           {labelText}
         </label>
       )}
+
       <div className="relative">
         <input
           type={showPassword ? "text" : "password"} // Show password based on showPassword state
           value={password}
           onChange={(e) => setPassword(e.target.value)} // Update password
           placeholder="••••••••"
-          className={`block w-full bg-gray-100 dark:bg-neutral-800 px-4 rounded-md border dark:border-neutral-700 py-1.5 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input text-black dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-neutral-400 focus:outline-none sm:text-sm sm:leading-6 mt-2 ${className}`}
+          className={`block w-full bg-gray-100 dark:bg-neutral-800 px-4 rounded-md border dark:border-neutral-700 py-1.5 shadow-[0px_1.5px_0px_0px_rgba(0,0,0,0.05)_inset] shadow-input text-black dark:text-white placeholder:text-gray-400 focus:ring-2 focus:ring-neutral-400 focus:outline-none sm:text-sm sm:leading-6 ${className}`}
           required
         />
 

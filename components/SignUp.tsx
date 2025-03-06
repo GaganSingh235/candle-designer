@@ -109,7 +109,7 @@ export default function SignUp() {
                     <div>
                       <label
                         htmlFor="first-name"
-                        className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
+                        className="block text-sm leading-6 text-neutral-700 dark:text-neutral-400"
                       >
                         First Name
                       </label>
@@ -130,7 +130,7 @@ export default function SignUp() {
                     <div>
                       <label
                         htmlFor="last-name"
-                        className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
+                        className="block text-sm leading-6 text-neutral-700 dark:text-neutral-400"
                       >
                         Last Name
                       </label>
@@ -153,7 +153,7 @@ export default function SignUp() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium leading-6 text-neutral-700 dark:text-white"
+                      className="block text-sm leading-6 text-neutral-700 dark:text-neutral-400"
                     >
                       Email address
                     </label>
@@ -180,6 +180,7 @@ export default function SignUp() {
                       setShowPassword={setShowPassword}
                       label
                       labelText="Password"
+                      className="mt-2"
                     />
                   </div>
 
@@ -191,6 +192,7 @@ export default function SignUp() {
                       setShowPassword={setShowConfirmPassword}
                       label
                       labelText="Confirm Password"
+                      className="mt-2"
                     />
                   </div>
 
