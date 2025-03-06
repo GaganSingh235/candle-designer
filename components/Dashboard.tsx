@@ -942,39 +942,39 @@ function Sidebar({
             onClick={() => setOpen(true)}
           />
         </div>
-
         {/* Mobile Sidebar Navigation  */}
         <AnimatePresence>
           {open && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="fixed inset-0 z-[90] bg-black/50"
-                onClick={() => setOpen(false)} // Exit sidebar when press outside
-              />
-              {/* Sidebar animates smoothly from left into the screen */}
-              <motion.div
-                initial={{ x: "-100%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: "-100%", opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className={`fixed inset-0 z-[100] flex h-full w-[75%] border-r dark:border-r-neutral-700 shadow-[0_10px_30px_rgba(0,0,0,0.4)] flex-col justify-between bg-white p-4 dark:bg-neutral-800 sm:p-10 rounded-tr-3xl rounded-br-3xl ${className}`}
-              >
-                <div
-                  className="absolute right-6 top-10 z-50 text-neutral-800 dark:text-neutral-200"
-                  onClick={() => setOpen(false)} // Exit sidebar when X is pressed
-                >
-                  <IconX />
-                </div>
-                {children} {/* Content */}
-              </motion.div>
-            </>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[90] bg-black/50"
+              onClick={() => setOpen(false)} // Exit sidebar when pressing outside
+            />
           )}
-          <ThemeToggle /> {/* Theme Toggle */}
         </AnimatePresence>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ x: "-100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "-100%", opacity: 0 }} // Ensuring smooth exit animation
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={`fixed inset-0 z-[100] flex h-full w-[75%] border-r dark:border-r-neutral-700 shadow-[0_10px_30px_rgba(0,0,0,0.4)] flex-col justify-between bg-white p-4 dark:bg-neutral-800 sm:p-10 rounded-tr-3xl rounded-br-3xl ${className}`}
+            >
+              <div
+                className="absolute right-6 top-10 z-50 text-neutral-800 dark:text-neutral-200"
+                onClick={() => setOpen(false)} // Exit sidebar when X is pressed
+              >
+                <IconX />
+              </div>
+              {children} {/* Content */}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <ThemeToggle /> {/* Theme Toggle */}
       </div>
     </>
   );

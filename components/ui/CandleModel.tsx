@@ -10,12 +10,14 @@ export default function CandleModel({
   preview, // Final preview state
   type,
   color,
+  enablePan,
   className,
 }: {
   // TypeScript Parameter Types
   preview?: boolean;
   type: string;
   color: string;
+  enablePan?: boolean;
   className?: string;
 }) {
   const { scene } = useGLTF(`/models/${type}.glb`); // Creating 3D Candle Object
@@ -25,16 +27,15 @@ export default function CandleModel({
   // Effect to update candle colour
   useEffect(() => {
     if (!ref.current) return;
-    console.log("CandleModel received color:", color);
 
-    if (ref.current) {
-      ref.current.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
-          (child.material as THREE.MeshStandardMaterial).color.set(color);
-        }
-      });
-    }
-  }, [color]); // Re-run effect if colour dependency changes
+    ref.current.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        const material = child.material as THREE.MeshStandardMaterial;
+        material.color.set(color);
+        material.needsUpdate = true; // Force material update
+      }
+    });
+  }, [color, scene]); // Re-run effect if colour dependency changes
 
   // Effect to create final spinning preview
   useEffect(() => {
@@ -60,7 +61,7 @@ export default function CandleModel({
       <ambientLight intensity={0.75} /> {/* Set light intensity */}
       <directionalLight position={[10, 10, 10]} /> {/* Position light source */}
       <primitive object={scene} ref={ref} /> {/* 3D Candle Model object */}
-      <OrbitControls enableZoom={false} />{" "}
+      <OrbitControls enableZoom={false} enablePan={enablePan} />
       {/* Allow users to move and rotate candle, but not zoom */}
     </Canvas>
   );
