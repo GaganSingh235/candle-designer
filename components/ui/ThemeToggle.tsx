@@ -56,7 +56,7 @@ export default function ThemeToggle({
           onMouseEnter={() => setHovered(true)} // Track hover state
           onMouseLeave={() => setHovered(false)}
           className="p-2 flex items-center justify-center w-10 rounded-full transition
-          duration-200 border border-t-2 shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+          duration-200 border border-t-2 shadow-[0_10px_30px_rgba(0,0,0,0.2)]
            dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800
             dark:text-white z-50"
         >

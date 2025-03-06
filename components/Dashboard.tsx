@@ -349,7 +349,6 @@ function SidebarLayout({
             {categories.map((category, idx) => {
               // Creating id that acts as a unique key for each Category
               const id = `primary-link-${idx}`;
-
               return (
                 <button
                   key={id}
