@@ -58,7 +58,7 @@ export default function CandleOptions({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="z-50 absolute -bottom-[230px] right-0 mb-2 w-[200px] rounded-lg bg-white dark:bg-neutral-800 border-[0.5px] dark:border-[0.5px] dark:border-neutral-700 text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
+          className="z-50 absolute -bottom-[230px] right-0 mb-2 w-[200px] rounded-lg bg-white dark:bg-neutral-800 border dark:border-neutral-700 text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
         >
           {/* Edit button */}
           <button
