@@ -12,7 +12,7 @@ export default function PasswordField({
   className, // Extra className styles for field
   labelClassName, // Extra className styles for label
 }: {
-  // TypeScript Paramter Types
+  // TypeScript Parameter Types
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   showPassword: boolean;
@@ -45,7 +45,7 @@ export default function PasswordField({
 
         <button
           type="button"
-          onClick={() => setShowPassword(!showPassword)} // Show passward if Eye is pressed
+          onClick={() => setShowPassword(!showPassword)} // Show password if Eye is pressed
           className="absolute inset-y-0 right-3 text-gray-500 dark:text-white-400"
         >
           {/* Updating Eye Icon when Password is shown or hidden */}

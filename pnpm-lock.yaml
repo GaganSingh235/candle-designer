@@ -26,6 +26,9 @@ importers:
       '@supabase/ssr':
         specifier: ^0.5.2
         version: 0.5.2(@supabase/supabase-js@2.49.1)
+      '@supabase/supabase-js':
+        specifier: ^2.49.1
+        version: 2.49.1
       '@tabler/icons-react':
         specifier: ^3.30.0
         version: 3.31.0(react@19.0.0)

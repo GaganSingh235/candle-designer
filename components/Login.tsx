@@ -141,7 +141,7 @@ export default function Login() {
           color="whiteBlack"
         >
           {loading ? "Logging In..." : "Continue with Login"}{" "}
-          {/* Display default and loding text*/}
+          {/* Display default and loading text*/}
         </Button>
 
         {/* Sign Up Link */}

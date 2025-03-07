@@ -8,11 +8,11 @@ import { IconCircleCheck, IconCircleCheckFilled } from "@tabler/icons-react";
 // Define exported Loader component
 export default function Loader({
   // Parameters
-  loadingStates, // Loading text arrary
+  loadingStates, // Loading text array
   duration = 1000,
   loop = true,
 }: {
-  // TypeScript Paramter Types
+  // TypeScript Parameter Types
   loadingStates: string[];
   duration?: number;
   loop?: boolean;
@@ -26,13 +26,13 @@ export default function Loader({
         (prevState) =>
           loop
             ? prevState === loadingStates.length - 1
-              ? 0 // Restar if looping
+              ? 0 // Restart if looping
               : prevState + 1
             : Math.min(prevState + 1, loadingStates.length - 1) // Stop at least once if not looping
       );
     }, duration);
 
-    // Cleanup function to clear timeout on component unount or update
+    // Cleanup function to clear timeout on component unmount or update
     return () => clearTimeout(timeout);
   }, [currentState, loop, loadingStates.length, duration]);
 

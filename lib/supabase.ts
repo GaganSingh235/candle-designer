@@ -1,4 +1,4 @@
-// Import createBrowserClient function from isntalled Supabase package
+// Import createBrowserClient function from installed Supabase package
 import { createBrowserClient } from "@supabase/ssr";
 
 // Define exported function to create Supabase client instance

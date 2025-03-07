@@ -41,7 +41,7 @@ export function useRetrieveCandles({
   category,
   setCandles, // Candle Information
 }: {
-  // TypeScript Paramter Types
+  // TypeScript Parameter Types
   category: string;
   setCandles: React.Dispatch<
     React.SetStateAction<
@@ -239,7 +239,7 @@ export async function useUpdateCandleCategory(
     return alert("User not authenticated.");
   }
 
-  // Update category to newCatroy for selected candle
+  // Update category to newCategory for selected candle
   const { error } = await supabase
     .from("candles")
     .update({ category: newCategory })
@@ -263,7 +263,7 @@ export async function usePermanentlyTrashCandle(
     return alert("User not authenticated.");
   }
 
-  // Dekete selected candle from table
+  // Delete selected candle from table
   const { error } = await supabase
     .from("candles")
     .delete()
@@ -295,7 +295,7 @@ export async function useExportCandle(
     .eq("id", candleId)
     .single(); // Returns as single object
 
-  // Return alert error if dailed to fetch candle
+  // Return alert error if failed to fetch candle
   if (fetchError) {
     return alert(`Error fetching candle: ${fetchError?.message}`);
   }

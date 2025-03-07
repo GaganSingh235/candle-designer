@@ -19,7 +19,7 @@ export default function DashboardPage() {
       if (!user) {
         router.push("/login");
       } else {
-        setLoading(false); // Otherwise stop laoding screen
+        setLoading(false); // Otherwise stop loading screen
       }
     });
   }, [supabase.auth, router]);

@@ -22,7 +22,7 @@ export default function Tooltip({
 }) {
   const [hovered, setHovered] = useState(false); // State to track Hover Status
   const [isMobile, setIsMobile] = useState(false); // State to track mobile screen status
-  let timeout: NodeJS.Timeout | null = null; // Timeout reference for autohiding on mobile
+  let timeout: NodeJS.Timeout | null = null; // Timeout reference for auto-hiding on mobile
 
   // Check if the user is on a mobile device
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Tooltip({
     }
   };
 
-  // Positon styles for tooltip location relative to object
+  // Position styles for tooltip location relative to object
   const positionStyles = {
     top: {
       bottom: `calc(100% + ${distance}px)`,
