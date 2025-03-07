@@ -24,18 +24,15 @@ export default function CandleModel({
 
   // Effect to update candle colour
   useEffect(() => {
-    if (!ref.current) return; // Return if no candle object
+    if (!ref.current) return;
 
-    // Traverse through all children of candle object
     ref.current.traverse((child) => {
-      // If child is a mesh, update material colour
       if (child instanceof THREE.Mesh) {
-        const material = child.material as THREE.MeshStandardMaterial;
-        material.color.set(color);
-        material.needsUpdate = true; // Force material update
+        child.material = child.material.clone();
+        child.material.color.set(color);
       }
     });
-  }, [color, scene]); // Re-run effect if colour dependency changes
+  }, [color]);
 
   // Effect to create final spinning preview
   useEffect(() => {
@@ -60,7 +57,19 @@ export default function CandleModel({
     <Canvas className={`md:top-0 ${className}`}>
       <ambientLight intensity={0.75} /> {/* Set light intensity */}
       <directionalLight position={[10, 10, 10]} /> {/* Position light source */}
-      <primitive object={scene} ref={ref} /> {/* 3D Candle Model object */}
+      {/* 3D Candle Model object */}
+      <primitive
+        object={scene}
+        ref={ref}
+        // Reload the color of the candle when the color changes
+        onUpdate={(self: THREE.Group) => {
+          self.traverse((child: THREE.Object3D | THREE.Mesh) => {
+            if (child instanceof THREE.Mesh) {
+              child.material.color.set(color);
+            }
+          });
+        }}
+      />
       <OrbitControls enableZoom={false} enablePan={false} />
       {/* Allow users to move and rotate candle, but not zoom */}
     </Canvas>
