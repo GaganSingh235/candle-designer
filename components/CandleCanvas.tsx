@@ -164,7 +164,7 @@ export default function CandleCanvas() {
           preview={preview}
           type={selectedType}
           color={selectedColor}
-          className="top-14"
+          className="top-10"
         />
       )}
       {/* Display design features only if candle is not exported */}
