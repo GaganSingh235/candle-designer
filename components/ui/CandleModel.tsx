@@ -10,14 +10,12 @@ export default function CandleModel({
   preview, // Final preview state
   type,
   color,
-  enablePan,
   className,
 }: {
   // TypeScript Parameter Types
   preview?: boolean;
   type: string;
   color: string;
-  enablePan?: boolean;
   className?: string;
 }) {
   const { scene } = useGLTF(`/models/${type}.glb`); // Creating 3D Candle Object
@@ -61,7 +59,7 @@ export default function CandleModel({
       <ambientLight intensity={0.75} /> {/* Set light intensity */}
       <directionalLight position={[10, 10, 10]} /> {/* Position light source */}
       <primitive object={scene} ref={ref} /> {/* 3D Candle Model object */}
-      <OrbitControls enableZoom={false} enablePan={enablePan} />
+      <OrbitControls enableZoom={false} enablePan={false} />
       {/* Allow users to move and rotate candle, but not zoom */}
     </Canvas>
   );

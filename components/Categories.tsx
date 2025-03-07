@@ -183,7 +183,6 @@ export function Searched({
                 preview={false}
                 type={candle.type}
                 color={candle.color}
-                enablePan={false}
               />
 
               {/* Display candle name, end with "..." if above 25 characters */}
@@ -374,7 +373,6 @@ export function Candles() {
               preview={false}
               type={candle.type}
               color={candle.color}
-              enablePan={false}
             />
 
             {/* Display candle name, end with "..." if above 25 characters */}
@@ -590,7 +588,6 @@ export function Starred() {
                 preview={false}
                 type={candle.type}
                 color={candle.color}
-                enablePan={false}
               />
 
               {/* Display candle name, end with "..." if above 25 characters */}
@@ -697,7 +694,6 @@ export function Trashed() {
                 preview={false}
                 type={candle.type}
                 color={candle.color}
-                enablePan={false}
               />
 
               {/* Display candle name, end with "..." if above 25 characters */}
@@ -796,7 +792,6 @@ export function Exported() {
                 preview={false}
                 type={candle.type}
                 color={candle.color}
-                enablePan={false}
               />
 
               {/* Candle Name, if more than 25 character display "..." at the end */}
