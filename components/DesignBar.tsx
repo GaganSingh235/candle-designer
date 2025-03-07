@@ -98,7 +98,7 @@ export default function DesignBar({
         >
           <IconLayoutNavbarCollapse
             strokeWidth={1.5}
-            className="h-5 w-5 text-neutral-500 dark:text-neutral-400"
+            className="h-6 w-6 text-neutral-500 dark:text-neutral-400"
           />
         </button>
       </div>
@@ -168,7 +168,7 @@ function ColorButton({
                   style={{ backgroundColor: color }}
                   onClick={() => {
                     onColorChange(color); // Update colour change
-                    setSelectedColor(color); // Update slected colour
+                    setSelectedColor(color); // Update selected colour
                     setShowPicker(false); // Close picker
                   }}
                 />
@@ -329,7 +329,7 @@ function DecorButton({
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed md:absolute left-7 bottom-7 md:-left-[175%] translate-y-1/2 md:bottom-full md:mb-5 flex flex-col md:flex-row gap-2 bg-gray-200 dark:bg-neutral-800 p-3 shadow-[0_10px_30px_rgba(0,0,0,0.4)] rounded-2xl border border-gray-300 dark:border-neutral-700"
           >
-            {/* Dssplay each decor item */}
+            {/* Display each decor item */}
             <div className="flex flex-col md:flex-row gap-2">
               {decor.map((decor) => (
                 <button

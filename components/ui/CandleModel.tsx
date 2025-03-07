@@ -24,9 +24,11 @@ export default function CandleModel({
 
   // Effect to update candle colour
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) return; // Return if no candle object
 
+    // Traverse through all children of candle object
     ref.current.traverse((child) => {
+      // If child is a mesh, update material colour
       if (child instanceof THREE.Mesh) {
         const material = child.material as THREE.MeshStandardMaterial;
         material.color.set(color);
